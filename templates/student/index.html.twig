@@ -3,58 +3,55 @@
 {% block title %}Students{% endblock %}
 
 {% block body %}
-    <!-- ### $App Screen Content ### -->
-    <main class='main-content bgc-grey-100'>
-        <div id='mainContent'>
-            <div class="container-fluid">
-                {#<h4 class="c-grey-900 mT-10 mB-30">Students</h4>#}
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="bgc-white bd bdrs-3 p-20 mB-20">
-                            <h4 class="c-grey-900 mB-20">Students</h4>
-                            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Father Name</th>
-                                    <th>Last Name</th>
-                                    <th>Age</th>
-                                    <th>Birthday</th>
-                                    <th>CNP</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for student in students %}
-                                    <tr>
-                                        <td>{{ student.firstName }}</td>
-                                        <td>{{ student.fatherName }}</td>
-                                        <td>{{ student.lastName }}</td>
-                                        <td>24</td>
-                                        <td>{{ student.birthday ? student.birthday|date('Y-m-d') : '' }}</td>
-                                        <td>{{ student.cnp }}</td>
-                                        <td>
-                                            <a href="{{ path('student_show', {'id': student.id}) }}">show</a>
-                                            <a href="{{ path('student_edit', {'id': student.id}) }}">edit</a>
-                                        </td>
-                                    </tr>
-                                {% else %}
-                                    <tr>
-                                        <td colspan="7">no records found</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                            <a href="{{ path('student_new') }}">
-                                <button type="button" class="btn cur-p btn-outline-primary">
-                                    Create new
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="bgc-white bd bdrs-3 p-20 mB-20">
+                <h4 class="c-grey-900 mB-20">Students</h4>
+                <table id="dataTable" class="table table-hover" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Father Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Birthday</th>
+                        <th>CNP</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.firstName }}</td>
+                            <td>{{ student.fatherName }}</td>
+                            <td>{{ student.lastName }}</td>
+                            <td>{{ student.birthday ? "now"|date("Y") - student.birthday|date('Y') : '-' }}</td>
+                            <td>{{ student.birthday ? student.birthday|date('d/m/Y') : '' }}</td>
+                            <td>{{ student.cnp }}</td>
+                            <td>
+                                <a href="{{ path('student_show', {'id': student.id}) }}">
+                                    <button type="button" class="btn cur-p btn-outline-info">Show</button>
+                                </a>
+                                <a href="{{ path('student_edit', {'id': student.id}) }}">
+                                    <button type="button" class="btn cur-p btn-outline-info">Edit</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('student_new') }}">
+                    <button type="button" class="btn cur-p btn-outline-primary">
+                        Create new
+                    </button>
+                </a>
             </div>
         </div>
-    </main>
+    </div>
 
 {% endblock body %}
