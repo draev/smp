@@ -8,12 +8,8 @@
         <div class="bgc-white p-20 bd">
             <h3 class="c-grey-900">Edit Student</h3>
             <div class="mT-30">
-                {{ include('student/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('student/_form.html.twig', {'button_label': 'Update', 'button_delete' : true}) }}
             </div>
         </div>
     </div>
-
-    <a href="{{ path('student_index') }}">back to list</a>
-
-    {{ include('student/_delete_form.html.twig') }}
 {% endblock %}
